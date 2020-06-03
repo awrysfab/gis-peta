@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Peta Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var surabaya = [-7.257472, 112.752090];
+        var mojokerto = [-7.470475, 112.440132];
+        var batu = [-7.883065, 112.533447];
+
+        var map = L.map('map').setView(surabaya, 10);
+
+        L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=gwlJwVYbUoin7as5lAkl', {
+            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+        }).addTo(map);
+
+        var marker1 =L.marker(surabaya).addTo(map);
+        marker1.bindPopup("Ini Surabaya")
+        var marker2 =L.marker(mojokerto).addTo(map);
+        marker2.bindPopup("Ini Mojokerto")
+        var marker3 = L.marker(batu).addTo(map);
+        marker3.bindPopup("Ini Batu")
+
+        map.on('click', function (e) {
+            var marker = new L.marker(e.latlng).addTo(map);
+            marker.bindPopup(
+                "<b>" + e.latlng + "</b>"
+            )
+            function addMarker(e) {
+                // Add marker to map at click location; add popup window
+                var newMarker = new L.marker(e.latlng).addTo(map);
+            }
+        });
+    </script>
+</body>
+
+</html>
